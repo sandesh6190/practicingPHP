@@ -75,7 +75,7 @@ require_once('navbar.php');
             </div>
             <div class="card-footer">
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-danger w-100">Save</button>
+                    <button type="submit" class="btn btn-primary w-100">Save</button>
                 </div>
             </div>
         </div>

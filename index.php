@@ -1,4 +1,13 @@
 <?php
+require_once('connection.php');
+
+$connection = ConnectionHelper::getConnection();
+
+$query = "select * from member";
+$statement = $connection->prepare($query);
+$statement->execute();
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 require_once('header.php');
 require_once('navbar.php');
 ?>
@@ -6,30 +15,46 @@ require_once('navbar.php');
 <table class="table table-info">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col" </th>First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">SN</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone </th>
+      <th scope="col">Role</th>
+      <th scope="col">Date Of Birth</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <?php
+    $sn = 0;
+    foreach ($result as $member):
+      ?>
+      <tr>
+        <td>
+          <?= ++$sn ?>
+        </td>
+        <td>
+          <?= $member['Name'] ?>
+        </td>
+        <td>
+          <?= $member['Address'] ?>
+        </td>
+        <td>
+          <?= $member['Email'] ?>
+        </td>
+        <td>
+          <?= $member['Phone'] ?>
+        </td>
+        <td>
+          <?= $member['Role'] ?>
+        </td>
+        <td>
+          <?= $member['DateOfBirth'] ?>
+        </td>
+      </tr>
+      <?php
+    endforeach;
+    ?>
   </tbody>
 </table>
 
